@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0; 
+}
+
+ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.board_wrap {
+    width: 55rem;
+    margin: 5.5rem auto;
+}
+
+.board_title {
+    margin-bottom: 2rem;
+}
+
+.board_title strong {
+    font-size: 3rem;
+}
+
+.bt_wrap {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0;
+}
+.bt_wrap a{
+    display: inline-block; /* 인라인블록 쓸때 정확하게 보기위해 부모에 폰트사이즈0 */
+    min-width:4.5rem;
+    padding: 0.7rem;
+    margin-left:0.7rem;
+    border: 1px solid #000;
+    border-radius: 2px;
+    font-size:1rem;
+    color:#000;
+}
+.bt_wrap a:first-child {
+    margin-left: 0;
+}
+
+.bt_wrap a.on {
+    background: #000;
+    color: #fff;
+}
+
+.board_list {
+    width:100%;
+    border-top:2px solid #000;
+}
+
+.board_list > div {
+    border-bottom:1px solid #ddd;
+    font-size: 0;
+}
+
+.board_list > div.top {
+    border-bottom:1px solid #ddd;
+}
+
+.board_list > div.top div{
+    font-weight: 600;
+}
+.board_list > div:last-child {
+    border-bottom:1px solid #000;
+}
+
+.board_list > div > div {
+    display:inline-block;
+    padding:0.9rem 0;
+    text-align: center;
+    font-size:1rem;
+}
+
+.board_list .num {
+    width:10%;
+}
+.board_list .top .title {
+    text-align: center;
+}
+.board_list .title {
+    width:60%;
+    text-align: left;
+}
+.board_list .writer {
+    width:10%;
+}
+.board_list .date {
+    width:10%;
+}
+.board_list .count {
+    width:10%;
+}
+
+.board_page {
+    margin-top:1.8rem;
+    text-align: center;
+    font-size: 0;
+}
+
+.board_page a {
+    display: inline-block;
+    width:2rem;
+    height: 2rem;
+    box-sizing: border-box;
+    border:1px solid #ddd;
+    border-left: 0;
+    vertical-align: middle;
+    line-height: 100%;
+}
+
+.board_page a.bt {
+    font-size: 0.8rem;
+    padding-top:9px;
+    letter-spacing: -1px;
+    color:#000;
+}
+
+.board_page a.num {
+    font-size: 1rem;
+    padding-top: 8px;
+    color:#000;
+}
+
+.board_page a:first-child {
+    border-left: 1px solid #ddd;
+}
+
+.board_page a.num.on {
+    background-color: #000;
+    background: #000;
+    color: #fff;
+}
