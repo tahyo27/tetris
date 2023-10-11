@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" %> <!-- 안넣으니까 공지사항 깨짐 -->
 <nav class="navbar">
     <div class="navbar_logo">
         <i class="fa-brands fa-octopus-deploy"></i>
@@ -7,6 +8,7 @@
     
     <ul class="navbar_menu">
         <li><a href="/">HOME</a></li>
+        <li><a href="announce.do">공지사항</a></li>
         <li><a href="board.do">BOARD</a></li>
         <li><a href="">FAQ</a></li>
         <li><a href="">ABOUT</a></li>

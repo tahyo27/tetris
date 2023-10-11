@@ -12,6 +12,7 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/views/comm/header.jsp"%>
+    
     <div class="board_wrap">
         <div class="board_title">
             <strong>공지사항</strong>
