@@ -66,9 +66,9 @@ a {
 .board_list > div.top div{
     font-weight: 600;
 }
-.board_list > div:last-child {
-    border-bottom:1px solid #000;
-}
+/*.board_list > div:last-child {*/
+/*    border-bottom:1px solid #000;*/
+/*}*/
 
 .board_list > div > div {
     display:inline-block;

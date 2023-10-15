@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="../../../css/boardcss.css">
     <link rel="stylesheet" href="css/hfcss.css">
     <script src="https://kit.fontawesome.com/ab151a372f.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    
+<script type="text/javascript">
+    function announceOne(element) {
+        console.log("announceOne()...");
+        let num = element.getAttribute("data_an_num");
+        console.log(num);
+        window.location.href = "/announceOne.do?num=" + num;
+}
+
+</script>
 </head>
 <body>
     <%@ include file="/WEB-INF/views/comm/header.jsp"%>
@@ -27,7 +39,7 @@
                     <div class="count">조회</div>
                 </div>
                 <c:forEach var="vo" items="${vos}">
-                    <div class="content">
+                    <div class="content" onclick="announceOne(this)" data_an_num="${vo.an_num}">
                         <div class="num">${vo.an_num}</div>
                         <div class="title">${vo.an_title}</div>
                         <div class="writer">${vo.an_writer}</div>

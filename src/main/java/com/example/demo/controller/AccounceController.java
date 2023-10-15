@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.AnnounceVO;
 import com.example.demo.service.AnnounceService;
@@ -34,7 +35,14 @@ public class AccounceController {
 		    }
 		}
 		model.addAttribute("vos", vos);
-		return "WEB-INF/views/board/anncounce.jsp";
+		return "WEB-INF/views/board/announce.jsp";
+	}
+	
+	@GetMapping("announceOne.do")
+	public String announce_selectOne(Model model, String num) {
+		log.info("announce_selectOne....num" + num);
+		
+		return "WEB-INF/views/board/ann_selectone.jsp";
 	}
 
 }

@@ -7,6 +7,8 @@
     <title>공지사항</title>
     <script src="https://kit.fontawesome.com/ab151a372f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../../css/boardcss.css">
+    <link rel="stylesheet" href="css/hfcss.css">
+   
 </head>
 <body>
     <%@ include file="/WEB-INF/views/comm/header.jsp"%>
