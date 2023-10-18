@@ -6,4 +6,5 @@ import com.example.demo.model.AnnounceVO;
 
 public interface AnnounceService {
 	List<AnnounceVO> ann_selectAll() throws Exception;
+	int ann_insert(AnnounceVO vo);
 }

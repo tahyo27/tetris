@@ -44,7 +44,7 @@ a {
     margin-left: 0;
 }
 
-.bt_wrap a.on {
+.bt_wrap a.on:hover {
     background: #000;
     color: #fff;
 }

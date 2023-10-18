@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.AnnounceVO;
@@ -26,14 +27,6 @@ public class AccounceController {
 		
 		List<AnnounceVO> vos = annService.ann_selectAll();
 		
-		if (vos.isEmpty()) {
-		    System.out.println("The list is empty.");
-		} else {
-		    // 리스트가 비어있지 않으면 각 요소의 값을 출력
-		    for (AnnounceVO vo : vos) {
-		        System.out.println(vo.toString()); // 또는 필요한 정보를 출력하는 방법으로 변경 가능
-		    }
-		}
 		model.addAttribute("vos", vos);
 		return "WEB-INF/views/board/announce.jsp";
 	}
@@ -44,5 +37,23 @@ public class AccounceController {
 		
 		return "WEB-INF/views/board/ann_selectone.jsp";
 	}
-
-}
+	
+	@GetMapping("announce_insert.do")
+	public String announce_insert(Model model) {
+		log.info("ann_insert...");
+		
+		return "WEB-INF/views/board/ann_insert.jsp";
+	}
+	
+	@PostMapping("ann_insertOK.do")
+	public String announce_insertOK(AnnounceVO vo) {
+		log.info("ann_insertOK....." + vo);
+		int result = annService.ann_insert(vo);
+		log.info("result" + result);
+		if(result==1)
+			return "redirect:/announce.do";
+		else
+			return "redirect:/board.do";
+	}
+	
+}//end controller

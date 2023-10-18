@@ -8,4 +8,9 @@
 	 <select id="ann_selectAll" resultType="com.example.demo.model.AnnounceVO">
 		 select * from ANNOUNCE order by an_num desc
 	 </select>
+	 
+	 <insert id="ann_insert">
+		 insert into ANNOUNCE(an_num, an_title, an_writer, an_pwd, an_content) 
+		 values(ann_seq.nextval, #{an_title}, #{an_writer}, #{an_pwd}, #{an_content}) 
+	 </insert>
  </mapper>

@@ -12,4 +12,5 @@ public class AnnounceVO {
 	private String an_writer;
 	private Timestamp an_date;
 	private int an_vcount;
+	private String an_pwd;
 }

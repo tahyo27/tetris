@@ -9,4 +9,5 @@ import com.example.demo.model.AnnounceVO;
 @Mapper
 public interface BoardMapper {
 	List<AnnounceVO> ann_selectAll() throws Exception;
+	int ann_insert(AnnounceVO vo);
 }

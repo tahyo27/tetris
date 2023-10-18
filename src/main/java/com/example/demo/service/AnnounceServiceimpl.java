@@ -22,6 +22,13 @@ public class AnnounceServiceimpl implements AnnounceService {
 		log.info("ann_selectAll...serviceimpl");
 		return boardMapper.ann_selectAll();
 	}
+
+	@Override
+	public int ann_insert(AnnounceVO vo) {
+		log.info("ann_insert...serviceimpl");
+		int result = boardMapper.ann_insert(vo);
+		return result;
+	}
 	
 	
 }

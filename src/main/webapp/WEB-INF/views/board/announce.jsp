@@ -20,6 +20,7 @@
         window.location.href = "/announceOne.do?num=" + num;
 }
 
+
 </script>
 </head>
 <body>
@@ -61,8 +62,8 @@
                 <a href="#" class="bt last">>></a>
             </div>
             <div class="bt_wrap">
+                <a href="announce_insert.do" class="on" >등록</a>
                 <a href="#" class="on">목록</a>
-                <a href="#">수정</a>
             </div>
         </div>
     </div>
