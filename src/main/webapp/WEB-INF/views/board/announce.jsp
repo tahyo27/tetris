@@ -61,6 +61,25 @@
                 <a href="#" class="bt next">></a>
                 <a href="#" class="bt last">>></a>
             </div>
+            <div>
+                <c:if test="${paging.startPage != 1 }">
+			    <a href="announce.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
+		        </c:if>
+                <c:forEach var="p" begin="${paging.startPage }"
+                        end="${paging.endPage }">
+                    <c:choose>
+                        <c:when test="${p == paging.nowPage }">
+                                <b>${p }</b>
+                        </c:when>
+                        <c:when test="${p != paging.nowPage }">
+                                <a href="announce.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
+                        </c:when>
+                        </c:choose>
+                </c:forEach>
+                <c:if test="${paging.endPage != paging.lastPage}">
+                    <a href="announce.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
+                </c:if>
+            </div>
             <div class="bt_wrap">
                 <a href="announce_insert.do" class="on" >등록</a>
                 <a href="#" class="on">목록</a>

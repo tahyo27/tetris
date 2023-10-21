@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.mapper.BoardMapper;
 import com.example.demo.model.AnnounceVO;
+import com.example.demo.model.PagingVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,9 +19,9 @@ public class AnnounceServiceimpl implements AnnounceService {
 	private BoardMapper boardMapper;
 
 	@Override
-	public List<AnnounceVO> ann_selectAll() throws Exception {
-		log.info("ann_selectAll...serviceimpl");
-		return boardMapper.ann_selectAll();
+	public List<AnnounceVO> ann_selectAll(PagingVO vo) throws Exception {
+		log.info("ann_selectAll...serviceimpl PagingVO" + vo);
+		return boardMapper.ann_selectAll(vo);
 	}
 
 	@Override
@@ -28,6 +29,12 @@ public class AnnounceServiceimpl implements AnnounceService {
 		log.info("ann_insert...serviceimpl");
 		int result = boardMapper.ann_insert(vo);
 		return result;
+	}
+
+	@Override
+	public int countBoard() {
+		log.info("countBoard...serviceimpl");
+		return boardMapper.countBoard();
 	}
 	
 	

@@ -6,11 +6,17 @@
 
  <mapper namespace="com.example.demo.mapper.BoardMapper">
 	 <select id="ann_selectAll" resultType="com.example.demo.model.AnnounceVO">
-		 select * from ANNOUNCE order by an_num desc
+		select * from (
+		select rownum as r, t.* from (
+		select * from ANNOUNCE order by an_num desc) t)
+		where r between #{start} and #{end}
 	 </select>
 	 
 	 <insert id="ann_insert">
 		 insert into ANNOUNCE(an_num, an_title, an_writer, an_pwd, an_content) 
 		 values(ann_seq.nextval, #{an_title}, #{an_writer}, #{an_pwd}, #{an_content}) 
 	 </insert>
+	 <select id="countBoard" resultType="int">
+		 select count(*) from ANNOUNCE
+	 </select>
  </mapper>

@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.AnnounceVO;
+import com.example.demo.model.PagingVO;
 import com.example.demo.service.AnnounceService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +24,23 @@ public class AccounceController {
 	private AnnounceService annService;
 	
 	@GetMapping("/announce.do")
-	public String announce_selectAll(Model model) throws Exception {
-		log.info("announce_selectAll");
-		
-		List<AnnounceVO> vos = annService.ann_selectAll();
-		
-		model.addAttribute("vos", vos);
+	public String announce_selectAll(Model model, PagingVO vo 
+			,@RequestParam (value="nowPage", required = false)String nowPage
+			,@RequestParam (value="cntPerPage",required = false)String cntPerPage) throws Exception {
+		log.info("announce_selectAll PagingVO", vo);
+		int total = annService.countBoard();
+		log.info("total...{}",total);
+		if(nowPage == null && cntPerPage == null) {
+			nowPage = "1";
+			cntPerPage = "5";
+		}else if(nowPage == null) {
+			nowPage = "1";	
+		}else if(cntPerPage == null) {
+			cntPerPage = "5";
+		}
+		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		model.addAttribute("paging",vo);
+		model.addAttribute("vos", annService.ann_selectAll(vo));
 		return "WEB-INF/views/board/announce.jsp";
 	}
 	
