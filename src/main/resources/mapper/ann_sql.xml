@@ -19,4 +19,12 @@
 	 <select id="countBoard" resultType="int">
 		 select count(*) from ANNOUNCE
 	 </select>
+	 <select id="ann_selectOne" resultType="com.example.demo.model.AnnounceVO">
+		select * from ANNOUNCE where an_num = #{num}
+	 </select>
+	 
+	 <update id="ann_update">
+		 update ANNOUNCE set an_title = #{an_title},
+		 an_pwd = #{an_pwd}, an_content = #{an_content} where an_num = #{an_num}
+	 </update>
  </mapper>

@@ -14,9 +14,9 @@
     
 <script type="text/javascript">
     function announceOne(element) {
-        console.log("announceOne()...");
+        // console.log("announceOne()...");
         let num = element.getAttribute("data_an_num");
-        console.log(num);
+        // console.log(num);
         window.location.href = "/announceOne.do?num=" + num;
 }
 
@@ -49,8 +49,26 @@
                     </div>
                 </c:forEach>
             </div>
-
             <div class="board_page">
+                <c:if test="${paging.startPage != 1 }">
+			    <a href="announce.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}" class="bt prev">&lt;</a>
+		        </c:if>
+                <c:forEach var="p" begin="${paging.startPage }"
+                        end="${paging.endPage }">
+                    <c:choose>
+                        <c:when test="${p == paging.nowPage }">
+                                <a class="num on">${p }</a>
+                        </c:when>
+                        <c:when test="${p != paging.nowPage }">
+                                <a href="announce.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}" class="num">${p }</a>
+                        </c:when>
+                        </c:choose>
+                </c:forEach>
+                <c:if test="${paging.endPage != paging.lastPage}">
+                    <a href="announce.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}" class="bt next">&gt;</a>
+                </c:if>
+            </div>
+            <!-- <div class="board_page">
                 <a href="#" class="bt first"><<</a>
                 <a href="#" class="bt prev"><</a>
                 <a href="#" class="num on">1</a>
@@ -60,29 +78,10 @@
                 <a href="#" class="num">5</a>
                 <a href="#" class="bt next">></a>
                 <a href="#" class="bt last">>></a>
-            </div>
-            <div>
-                <c:if test="${paging.startPage != 1 }">
-			    <a href="announce.do?nowPage=${paging.startPage - 1 }&cntPerPage=${paging.cntPerPage}">&lt;</a>
-		        </c:if>
-                <c:forEach var="p" begin="${paging.startPage }"
-                        end="${paging.endPage }">
-                    <c:choose>
-                        <c:when test="${p == paging.nowPage }">
-                                <b>${p }</b>
-                        </c:when>
-                        <c:when test="${p != paging.nowPage }">
-                                <a href="announce.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}">${p }</a>
-                        </c:when>
-                        </c:choose>
-                </c:forEach>
-                <c:if test="${paging.endPage != paging.lastPage}">
-                    <a href="announce.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}">&gt;</a>
-                </c:if>
-            </div>
+            </div> -->
             <div class="bt_wrap">
-                <a href="announce_insert.do" class="on" >등록</a>
-                <a href="#" class="on">목록</a>
+                <a href="announce_insert.do" class="on" >쓰기</a>
+                <!-- <a href="#" class="on">목록</a> -->
             </div>
         </div>
     </div>

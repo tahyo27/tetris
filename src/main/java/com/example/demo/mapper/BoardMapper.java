@@ -12,4 +12,6 @@ public interface BoardMapper {
 	List<AnnounceVO> ann_selectAll(PagingVO vo) throws Exception;
 	int ann_insert(AnnounceVO vo);
 	int countBoard();
+	AnnounceVO ann_selectOne(String num);
+	int ann_update(AnnounceVO vo);
 }

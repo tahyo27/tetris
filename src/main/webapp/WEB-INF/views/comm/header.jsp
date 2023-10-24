@@ -19,8 +19,8 @@
     </ul>
 
     <ul class="navbar_icons">
-        <li><i class="fa-brands fa-twitter"></i></li>
-        <li><i class="fa-brands fa-instagram"></i></li>
+        <li><a href="https://twitter.com"><i class="fa-brands fa-twitter"></i></a></li>
+        <li><a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a></li>
     </ul>
 
     <a href="#" class="navbar_toggleBtn"><i class="fa-solid fa-bars"></i></a>

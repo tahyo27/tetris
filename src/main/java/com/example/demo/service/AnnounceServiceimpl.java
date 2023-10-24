@@ -36,6 +36,16 @@ public class AnnounceServiceimpl implements AnnounceService {
 		log.info("countBoard...serviceimpl");
 		return boardMapper.countBoard();
 	}
+
+	@Override
+	public AnnounceVO ann_selectOne(String num) {
+		return boardMapper.ann_selectOne(num);
+	}
+
+	@Override
+	public int ann_update(AnnounceVO vo) {
+		return boardMapper.ann_update(vo);
+	}
 	
 	
 }

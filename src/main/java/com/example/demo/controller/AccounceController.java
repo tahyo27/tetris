@@ -48,6 +48,8 @@ public class AccounceController {
 	public String announce_selectOne(Model model, String num) {
 		log.info("announce_selectOne....num" + num);
 		
+		AnnounceVO selectOne = annService.ann_selectOne(num);
+		model.addAttribute("vo2", selectOne);
 		return "WEB-INF/views/board/ann_selectone.jsp";
 	}
 	
@@ -58,6 +60,15 @@ public class AccounceController {
 		return "WEB-INF/views/board/ann_insert.jsp";
 	}
 	
+	@GetMapping("announce_update.do")
+	public String announce_update(Model model, String num) {
+		log.info("announce_update... num" + num);
+		
+		AnnounceVO selectOne = annService.ann_selectOne(num);
+		model.addAttribute("vo2", selectOne);
+		
+		return "WEB-INF/views/board/ann_update.jsp";
+	}
 	@PostMapping("ann_insertOK.do")
 	public String announce_insertOK(AnnounceVO vo) {
 		log.info("ann_insertOK....." + vo);
@@ -66,7 +77,18 @@ public class AccounceController {
 		if(result==1)
 			return "redirect:/announce.do";
 		else
-			return "redirect:/board.do";
+			return "redirect:/";
+	}
+	
+	@PostMapping("ann_updatetOK.do")
+	public String ann_updatetOK(AnnounceVO vo) {
+		log.info("ann_updatetOK....." + vo);
+		int result = annService.ann_update(vo);
+		log.info("result" + result);
+		if(result==1)
+			return "redirect:/announce.do";
+		else
+			return "redirect:/";
 	}
 	
 }//end controller
