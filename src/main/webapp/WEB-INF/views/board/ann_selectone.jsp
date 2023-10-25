@@ -48,7 +48,7 @@
 
             <div class="bt_wrap">
                 <a href="announce_update.do?num=${param.num}">수정</a>
-                <a href="announce_delete.do?num=${param.num}">삭제</a>
+                <a href="announce_delete.do?num=${param.num}" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
             </div>
     
 </body>

@@ -1,14 +1,11 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.AnnounceVO;
 import com.example.demo.model.PagingVO;
@@ -18,12 +15,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-public class AccounceController {
+public class AnnounceController {
 	
 	@Autowired
 	private AnnounceService annService;
 	
-	@GetMapping("/announce.do")
+	@GetMapping("announce.do")
 	public String announce_selectAll(Model model, PagingVO vo 
 			,@RequestParam (value="nowPage", required = false)String nowPage
 			,@RequestParam (value="cntPerPage",required = false)String cntPerPage) throws Exception {
@@ -84,6 +81,17 @@ public class AccounceController {
 	public String ann_updatetOK(AnnounceVO vo) {
 		log.info("ann_updatetOK....." + vo);
 		int result = annService.ann_update(vo);
+		log.info("result" + result);
+		if(result==1)
+			return "redirect:/announce.do";
+		else
+			return "redirect:/";
+	}
+	
+	@GetMapping("announce_delete.do")
+	public String announce_delete(String num) {
+		log.info("announce_delete....." + num);
+		int result = annService.ann_delete(num);
 		log.info("result" + result);
 		if(result==1)
 			return "redirect:/announce.do";

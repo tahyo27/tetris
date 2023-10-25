@@ -34,7 +34,7 @@ public class HomeController {
 		return "index.jsp";
 	}
 	
-	@GetMapping("/board.do")
+	@GetMapping("board.do")
 	public String board() {
 		log.info("board controller");
 		

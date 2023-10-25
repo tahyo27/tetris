@@ -27,4 +27,9 @@
 		 update ANNOUNCE set an_title = #{an_title},
 		 an_pwd = #{an_pwd}, an_content = #{an_content} where an_num = #{an_num}
 	 </update>
+	 
+	 <delete id="ann_delete">
+		 delete from ANNOUNCE where an_num = #{num}
+	 </delete>
+	 
  </mapper>

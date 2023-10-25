@@ -39,12 +39,20 @@ public class AnnounceServiceimpl implements AnnounceService {
 
 	@Override
 	public AnnounceVO ann_selectOne(String num) {
+		log.info("ann_selectOne...serviceimpl");
 		return boardMapper.ann_selectOne(num);
 	}
 
 	@Override
 	public int ann_update(AnnounceVO vo) {
+		log.info("ann_update...serviceimpl");
 		return boardMapper.ann_update(vo);
+	}
+
+	@Override
+	public int ann_delete(String num) {
+		log.info("ann_delete...serviceimpl");
+		return boardMapper.ann_delete(num);
 	}
 	
 	

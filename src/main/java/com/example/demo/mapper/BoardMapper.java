@@ -14,4 +14,5 @@ public interface BoardMapper {
 	int countBoard();
 	AnnounceVO ann_selectOne(String num);
 	int ann_update(AnnounceVO vo);
+	int ann_delete(String num);
 }
