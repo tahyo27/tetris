@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.mapper.BoardMapper;
+import com.example.demo.mapper.AnnMapper;
 import com.example.demo.model.AnnounceVO;
 import com.example.demo.model.PagingVO;
 
@@ -16,43 +16,43 @@ import lombok.extern.slf4j.Slf4j;
 public class AnnounceServiceimpl implements AnnounceService {
 	
 	@Autowired
-	private BoardMapper boardMapper;
+	private AnnMapper annMapper;
 
 	@Override
 	public List<AnnounceVO> ann_selectAll(PagingVO vo) throws Exception {
 		log.info("ann_selectAll...serviceimpl PagingVO" + vo);
-		return boardMapper.ann_selectAll(vo);
+		return annMapper.ann_selectAll(vo);
 	}
 
 	@Override
 	public int ann_insert(AnnounceVO vo) {
 		log.info("ann_insert...serviceimpl");
-		int result = boardMapper.ann_insert(vo);
+		int result = annMapper.ann_insert(vo);
 		return result;
 	}
 
 	@Override
 	public int countBoard() {
 		log.info("countBoard...serviceimpl");
-		return boardMapper.countBoard();
+		return annMapper.countBoard();
 	}
 
 	@Override
-	public AnnounceVO ann_selectOne(String num) {
+	public AnnounceVO ann_selectOne(int num) {
 		log.info("ann_selectOne...serviceimpl");
-		return boardMapper.ann_selectOne(num);
+		return annMapper.ann_selectOne(num);
 	}
 
 	@Override
 	public int ann_update(AnnounceVO vo) {
 		log.info("ann_update...serviceimpl");
-		return boardMapper.ann_update(vo);
+		return annMapper.ann_update(vo);
 	}
 
 	@Override
 	public int ann_delete(String num) {
 		log.info("ann_delete...serviceimpl");
-		return boardMapper.ann_delete(num);
+		return annMapper.ann_delete(num);
 	}
 	
 	

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
- <mapper namespace="com.example.demo.mapper.BoardMapper">
+ <mapper namespace="com.example.demo.mapper.AnnMapper">
 	 <select id="ann_selectAll" resultType="com.example.demo.model.AnnounceVO">
 		select * from (
 		select rownum as r, t.* from (
@@ -31,5 +31,7 @@
 	 <delete id="ann_delete">
 		 delete from ANNOUNCE where an_num = #{num}
 	 </delete>
+	 
+	 
 	 
  </mapper>

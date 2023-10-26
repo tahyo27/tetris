@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.demo.mapper.BoardMapper">
+
+	<insert id="img_insert">
+		insert into IMAGE(IMG_NUM, IMG_FIRST, IMG_SECOND, IMG_THIRD)
+		values(#{img_num}, #{img_first}, #{img_second}, #{img_third})
+	</insert>
+
+	<insert id="bd_insert">
+		insert into BOARD(bd_num, bd_title, bd_writer, bd_pwd, bd_content)
+		values(bd_seq.nextval, #{bd_title}, #{bd_writer}, #{bd_pwd}, #{bd_content})
+	</insert>
+
+	<select id="bd_selectOne" resultType="com.example.demo.model.BoardVO">
+		select * from BOARD where bd_num = #{bd_num}
+	</select>
+
+	<select id="getBoardSeq" resultType="int">
+		SELECT bd_seq.currval FROM dual
+	</select>
+
+</mapper>

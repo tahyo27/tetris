@@ -44,8 +44,8 @@ public class AnnounceController {
 	@GetMapping("announceOne.do")
 	public String announce_selectOne(Model model, String num) {
 		log.info("announce_selectOne....num" + num);
-		
-		AnnounceVO selectOne = annService.ann_selectOne(num);
+		int num1 = Integer.parseInt(num);
+		AnnounceVO selectOne = annService.ann_selectOne(num1);
 		model.addAttribute("vo2", selectOne);
 		return "WEB-INF/views/board/ann_selectone.jsp";
 	}
@@ -60,8 +60,8 @@ public class AnnounceController {
 	@GetMapping("announce_update.do")
 	public String announce_update(Model model, String num) {
 		log.info("announce_update... num" + num);
-		
-		AnnounceVO selectOne = annService.ann_selectOne(num);
+		int num1 = Integer.parseInt(num);
+		AnnounceVO selectOne = annService.ann_selectOne(num1);
 		model.addAttribute("vo2", selectOne);
 		
 		return "WEB-INF/views/board/ann_update.jsp";

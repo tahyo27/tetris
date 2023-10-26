@@ -48,7 +48,7 @@
                 <div>
                     <dl>
                         <dt>이미지파일:</dt>
-                        <dd><input type="file" name="imageFiles" multiple="multiple"></dd>
+                        <dd><input type="file" name="imageFiles" multiple="multiple" accept=".jpg, .jpeg, .png" max="5"></dd>
                     </dl>
                 </div>
                 <div class="bt_wrap">
