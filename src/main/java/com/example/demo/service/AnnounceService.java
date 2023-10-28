@@ -12,4 +12,5 @@ public interface AnnounceService {
 	AnnounceVO ann_selectOne(int num);
 	int ann_update(AnnounceVO vo);
 	int ann_delete(String num);
+	
 }

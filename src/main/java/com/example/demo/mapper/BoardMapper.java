@@ -11,4 +11,6 @@ public interface BoardMapper {
 	int bd_insert(BoardVO vo);
 	BoardVO bd_selectOne(int num);
 	int getBoardSeq();
+	int bd_attach_update(BoardVO vo);
+	int bd_img_update(BoardVO vo);
 }

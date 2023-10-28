@@ -21,5 +21,12 @@
 	<select id="getBoardSeq" resultType="int">
 		SELECT bd_seq.currval FROM dual
 	</select>
+	<update id="bd_attach_update">
+		update BOARD set bd_attach = #{bd_attach} where bd_num = #{bd_num}
+	</update>
+	
+	<update id="bd_img_update">
+		update board set img_num = #{img_num} where bd_num = #{bd_num}
+	</update>
 
 </mapper>

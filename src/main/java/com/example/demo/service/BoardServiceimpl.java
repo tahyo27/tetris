@@ -34,4 +34,16 @@ public class BoardServiceimpl implements BoardService{
 		return boardMapper.getBoardSeq();
 	}
 
+	@Override
+	public int bd_attach_update(BoardVO vo) {
+		log.info("bd_attach_update.... boardservice");
+		return boardMapper.bd_attach_update(vo);
+	}
+
+	@Override
+	public int bd_img_update(BoardVO vo) {
+		log.info("bd_img_update.... boardservice");
+		return boardMapper.bd_img_update(vo);
+	}
+
 }

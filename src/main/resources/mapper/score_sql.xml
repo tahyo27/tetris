@@ -6,6 +6,6 @@
   
  <mapper namespace="com.example.demo.mapper.ScoreMapper">
 	 <select id="score_selectAll" resultType="com.example.demo.model.ScoreVO">
-		 select * from tetris
+		 select * from score
 	 </select>
  </mapper>
