@@ -9,7 +9,7 @@
     <ul class="navbar_menu">
         <li><a href="/">HOME</a></li>
         <li><a href="announce.do">공지사항</a></li>
-        <li><a href="board.do">게시판</a></li>
+        <li><a href="bd_selectAll.do">게시판</a></li>
         <li><a href="">랭킹보드</a></li>
         <li><a href="">ABOUT</a></li>
     </ul>

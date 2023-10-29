@@ -20,7 +20,7 @@
         <div class="board_one_wrap">
             <div class="board_one">
                 <div class="title">
-                    글 제목이다
+                    ${vo2.an_title}
                 </div>
                 <div class="info">
                     <dl>

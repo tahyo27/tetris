@@ -28,5 +28,16 @@
 	<update id="bd_img_update">
 		update board set img_num = #{img_num} where bd_num = #{bd_num}
 	</update>
+	
+	<select id="bd_selectAll" resultType="com.example.demo.model.BoardVO">
+		select * from (
+		select rownum as r, t.* from (
+		select * from board order by bd_num desc) t)
+		where r between #{start} and #{end}
+	</select>
+	
+	<select id="bd_countBoard" resultType="int">
+		 select count(*) from board
+	 </select>
 
 </mapper>

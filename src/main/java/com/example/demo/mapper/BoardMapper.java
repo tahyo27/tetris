@@ -1,9 +1,12 @@
 package com.example.demo.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.demo.model.BoardVO;
 import com.example.demo.model.ImageVO;
+import com.example.demo.model.PagingVO;
 
 @Mapper
 public interface BoardMapper {
@@ -13,4 +16,6 @@ public interface BoardMapper {
 	int getBoardSeq();
 	int bd_attach_update(BoardVO vo);
 	int bd_img_update(BoardVO vo);
+	List<BoardVO> bd_selectAll(PagingVO vo);
+	int bd_countBoard();
 }
