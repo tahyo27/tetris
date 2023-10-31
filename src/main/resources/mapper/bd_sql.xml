@@ -5,8 +5,13 @@
 <mapper namespace="com.example.demo.mapper.BoardMapper">
 
 	<insert id="img_insert">
-		insert into IMAGE(IMG_NUM, IMG_FIRST, IMG_SECOND, IMG_THIRD)
-		values(#{img_num}, #{img_first}, #{img_second}, #{img_third})
+		insert into IMAGE(IMG_NUM, IMG_FIRST, IMG_SECOND, IMG_THIRD, IMG_OFIRST, IMG_OSECOND, IMG_OTHIRD)
+		values(#{img_num}, #{img_first}, #{img_second}, #{img_third} , #{img_ofirst}, #{img_osecond}, #{img_othird})
+	</insert>
+	
+	<insert id="at_insert">
+		insert into attach(at_num, at_oname, at_sname)
+		values(#{at_num}, #{at_oname}, #{at_sname})
 	</insert>
 
 	<insert id="bd_insert">
@@ -22,7 +27,7 @@
 		SELECT bd_seq.currval FROM dual
 	</select>
 	<update id="bd_attach_update">
-		update BOARD set bd_attach = #{bd_attach} where bd_num = #{bd_num}
+		update board set at_num = #{at_num} where bd_num = #{bd_num}
 	</update>
 	
 	<update id="bd_img_update">
@@ -38,6 +43,14 @@
 	
 	<select id="bd_countBoard" resultType="int">
 		 select count(*) from board
+	 </select>
+	 
+	 <select id="at_selectOne" resultType="com.example.demo.model.AttachVO">
+		 select * from attach where at_num = #{at_num}
+	 </select>
+	 
+	 <select id="img_selectOne" resultType="com.example.demo.model.ImageVO">
+		 select * from image where img_num = #{img_num}
 	 </select>
 
 </mapper>

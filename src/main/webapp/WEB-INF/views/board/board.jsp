@@ -67,7 +67,7 @@
                     </c:if>
             </div>
             <div class="bt_wrap">
-                <a href="#" class="on">글쓰기</a>
+                <a href="bd_insert.do" class="on">글쓰기</a>
                 <!-- <a href="#">수정</a> -->
             </div>
         </div>

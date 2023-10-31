@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import com.example.demo.model.AttachVO;
 import com.example.demo.model.BoardVO;
 import com.example.demo.model.ImageVO;
 import com.example.demo.model.PagingVO;
@@ -15,4 +16,7 @@ public interface BoardService {
 	List<BoardVO> bd_selectAll(PagingVO vo);
 	BoardVO bd_selectOne(int num);
 	int bd_countBoard();
+	int at_insert(AttachVO vo);
+	AttachVO at_selectOne(int num);
+	ImageVO img_selectOne(int num);
 }

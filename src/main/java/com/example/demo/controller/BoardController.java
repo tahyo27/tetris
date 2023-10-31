@@ -1,15 +1,25 @@
 package com.example.demo.controller;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.UriUtils;
 
+import com.example.demo.model.AttachVO;
 import com.example.demo.model.BoardVO;
 import com.example.demo.model.ImageVO;
 import com.example.demo.model.PagingVO;
@@ -62,34 +72,51 @@ public class BoardController {
 		// 먼저 인서트하고
 		int bdinsert = boardService.bd_insert(vo);
 		int bdseq = boardService.getBoardSeq();// 시퀀스값을받아온후에 그 값을 img테이블에 저장후 다시 보드에 업데이트
-
+		List<UploadFile> imageFiles = fileStore.storeFiles(vo.getImageFiles());
+		for(UploadFile x : imageFiles) {
+			log.info("이미지파일 들어오는거 확인" + x);
+		}
 		// 이미지 처리는 update로 수정
 		if (!vo.getAttachFile().isEmpty()) { // 첨부파일에 값 들어있으면
 			UploadFile attachFile = fileStore.storeFile(vo.getAttachFile());
-			vo.setBd_attach(attachFile.getStoreFilename());
+			AttachVO at = new AttachVO();
+			at.setAt_num(bdseq);
+			at.setAt_oname(attachFile.getUploadFilename());
+			at.setAt_sname(attachFile.getStoreFilename());
+			int atinsert = boardService.at_insert(at);
+			vo.setAt_num(bdseq);
 			vo.setBd_num(bdseq); // seq넘버 세팅하고
 			int bdAttach = boardService.bd_attach_update(vo);
-			log.info("첨부파일 업데이트 확인용" + bdAttach);
+			log.info("보드의 at_num 확인용:" + bdAttach + " Attach업데이트 확인:" + atinsert);
 		}
-		if (!vo.getImageFiles().isEmpty()) {
-			List<UploadFile> imageFiles = fileStore.storeFiles(vo.getImageFiles());
+		if (!imageFiles.isEmpty()) {
+			log.info("이미지 엠티아니면");
 			ImageVO img = new ImageVO();
 			img.setImg_num(bdseq);
 			switch (imageFiles.size()) {
 			case 1:
 				img.setImg_first(imageFiles.get(0).getStoreFilename());
+				img.setImg_ofirst(imageFiles.get(0).getUploadFilename());
+				img.setImg_osecond("default.png");
 				img.setImg_second("default.png");
+				img.setImg_othird("default.png");
 				img.setImg_third("default.png");
 				break;
 			case 2:
 				img.setImg_first(imageFiles.get(0).getStoreFilename());
+				img.setImg_ofirst(imageFiles.get(0).getUploadFilename());
 				img.setImg_second(imageFiles.get(1).getStoreFilename());
+				img.setImg_osecond(imageFiles.get(1).getUploadFilename());
 				img.setImg_third("default.png");
+				img.setImg_othird("default.png");
 				break;
 			case 3:
 				img.setImg_first(imageFiles.get(0).getStoreFilename());
+				img.setImg_ofirst(imageFiles.get(0).getUploadFilename());
 				img.setImg_second(imageFiles.get(1).getStoreFilename());
+				img.setImg_osecond(imageFiles.get(1).getUploadFilename());
 				img.setImg_third(imageFiles.get(2).getStoreFilename());
+				img.setImg_othird(imageFiles.get(2).getUploadFilename());
 				break;
 			}
 			int imgInsert = boardService.img_insert(img);
@@ -99,6 +126,7 @@ public class BoardController {
 			int bdImgupdate = boardService.bd_img_update(vo);
 			log.info("bdImgupdate 결과 확인" + bdImgupdate);
 		}
+		
 		System.out.println("bdseq값:" + bdseq + " bd insert값:" + bdinsert);
 
 		log.info("insertOK vo:" + vo);
@@ -110,9 +138,36 @@ public class BoardController {
 	public String bd_selectone(Model model, String num) {
 		log.info("bd_selectone....num" + num);
 		int num1 = Integer.parseInt(num);
+		
 		BoardVO selectOne = boardService.bd_selectOne(num1);
+		AttachVO attachOne = boardService.at_selectOne(num1);
+		ImageVO imgOne = boardService.img_selectOne(num1);
+		model.addAttribute("at", attachOne);
+		model.addAttribute("img", imgOne);
 		model.addAttribute("vo2", selectOne);
 		return "WEB-INF/views/board/bd_selectone.jsp";
+	}
+	
+	@ResponseBody
+	@GetMapping("/images/{filename}")
+	public Resource showImage(@PathVariable String filename) throws MalformedURLException {
+	    return new UrlResource("file:" + fileStore.getFullPath(filename)); //파일 경로 url 반환
+	}
+	
+	@GetMapping("/download/{id}")
+	public ResponseEntity<Resource> downloadAttach(@PathVariable int id) throws MalformedURLException {
+		AttachVO atselectOne = boardService.at_selectOne(id);
+		log.info("Attach 확인용 :" + atselectOne);
+		String storeFilename = atselectOne.getAt_sname();
+		String uploadFilename = atselectOne.getAt_oname();
+		
+		UrlResource urlResource = new UrlResource("file:" + fileStore.getFullPath(storeFilename));
+		String encodedUploadFileName = UriUtils.encode(uploadFilename, StandardCharsets.UTF_8);
+	    String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\""; //특수문자 때문에 \""처리 해줌
+	    
+		 return ResponseEntity.ok()
+		            .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
+		            .body(urlResource);
 	}
 
 }// end BoardController

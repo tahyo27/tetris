@@ -45,6 +45,18 @@
                     ${vo2.bd_content}
                 </div>
             </div>
+            <div>
+                <dl>
+                    <dt>첨부파일:</dt>
+                    <dd><a href="/download/${vo2.at_num}" style="color:black">${at.at_oname}</a></dd>
+                </dl>
+                <dl>
+                    <dt>이미지:</dt>
+                    <dd>${img.img_ofirst}</dd>
+                    <dd>${img.img_osecond}</dd>
+                    <dd>${img.img_othird}</dd>
+                </dl>
+            </div>
 
             <div class="bt_wrap">
                 <a href="bd_update.do?num=${param.num}">수정</a>

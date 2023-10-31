@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.mapper.BoardMapper;
+import com.example.demo.model.AttachVO;
 import com.example.demo.model.BoardVO;
 import com.example.demo.model.ImageVO;
 import com.example.demo.model.PagingVO;
@@ -65,6 +66,24 @@ public class BoardServiceimpl implements BoardService{
 	public BoardVO bd_selectOne(int num) {
 		log.info("bd_selectOne.... boardservice");
 		return boardMapper.bd_selectOne(num);
+	}
+
+	@Override
+	public int at_insert(AttachVO vo) {
+		log.info("at_insert.... boardservice");
+		return boardMapper.at_insert(vo);
+	}
+
+	@Override
+	public AttachVO at_selectOne(int num) {
+		log.info("at_selectOne.... boardservice");
+		return boardMapper.at_selectOne(num);
+	}
+
+	@Override
+	public ImageVO img_selectOne(int num) {
+		log.info("at_selectOne.... boardservice");
+		return boardMapper.img_selectOne(num);
 	}
 
 }

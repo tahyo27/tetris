@@ -19,7 +19,7 @@ public class BoardVO {
 	private MultipartFile attachFile; // 첨부 파일
 	private List<MultipartFile> imageFiles; // 첨부 이미지
 	//서버에 들어갈 이름 저장
-	private String bd_attach;   
+	private int at_num;   
 	//이미지 여러개 들어가는곳 num값;
 	private int img_num;
 }

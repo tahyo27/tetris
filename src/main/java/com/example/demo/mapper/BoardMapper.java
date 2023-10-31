@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.demo.model.AttachVO;
 import com.example.demo.model.BoardVO;
 import com.example.demo.model.ImageVO;
 import com.example.demo.model.PagingVO;
@@ -18,4 +19,7 @@ public interface BoardMapper {
 	int bd_img_update(BoardVO vo);
 	List<BoardVO> bd_selectAll(PagingVO vo);
 	int bd_countBoard();
+	int at_insert(AttachVO vo);
+	AttachVO at_selectOne(int num);
+	ImageVO img_selectOne(int num);
 }

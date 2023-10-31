@@ -8,4 +8,7 @@ public class ImageVO {
 	private String img_first;
 	private String img_second;
 	private String img_third;
+	private String img_ofirst; //오리진 네임
+	private String img_osecond;
+	private String img_othird;
 }
