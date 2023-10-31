@@ -60,7 +60,7 @@
                             <c:when test="${p != paging.nowPage }">
                                     <a href="bd_selectAll.do?nowPage=${p }&cntPerPage=${paging.cntPerPage}" class="num">${p }</a>
                             </c:when>
-                            </c:choose>
+                        </c:choose>
                     </c:forEach>
                     <c:if test="${paging.endPage != paging.lastPage}">
                         <a href="bd_selectAll.do?nowPage=${paging.endPage+1 }&cntPerPage=${paging.cntPerPage}" class="bt next">&gt;</a>

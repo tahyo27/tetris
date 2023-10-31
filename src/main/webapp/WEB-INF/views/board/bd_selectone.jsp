@@ -1,4 +1,5 @@
 <%@ page session="false" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,13 +49,28 @@
             <div>
                 <dl>
                     <dt>첨부파일:</dt>
-                    <dd><a href="/download/${vo2.at_num}" style="color:black">${at.at_oname}</a></dd>
+                    <dd><a href="/attachdown/${vo2.at_num}" style="color:black">${at.at_oname}</a></dd>
                 </dl>
                 <dl>
+                    <c:if test="${img.img_first != 'default.png'}">
                     <dt>이미지:</dt>
-                    <dd>${img.img_ofirst}</dd>
-                    <dd>${img.img_osecond}</dd>
-                    <dd>${img.img_othird}</dd>
+                    <dd>
+                        <a href="/imgdown/${vo2.img_num}/1" style="color:black">${img.img_ofirst}</a>
+                        <img src="/images/${img.img_first}" width="100px" height="100px" style="border-style: solid; border-color: black;">
+                    </dd>
+                    </c:if>
+                    <c:if test="${img.img_second != 'default.png'}">
+                        <dd>
+                            <a href="/imgdown/${vo2.img_num}/2" style="color:black">${img.img_osecond}</a>
+                            <img src="/images/${img.img_second}" width="100px" height="100px" style="border-style: solid; border-color: black;">
+                        </dd>
+                    </c:if>
+                    <c:if test="${img.img_third != 'default.png'}">
+                        <dd>
+                            <a href="/imgdown/${vo2.img_num}/3" style="color:black">${img.img_othird}</a>
+                            <img src="/images/${img.img_third}" width="100px" height="100px" style="border-style: solid; border-color: black;">
+                        </dd>
+                    </c:if>
                 </dl>
             </div>
 
