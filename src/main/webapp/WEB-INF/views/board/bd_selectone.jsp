@@ -7,10 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>공지사항</title>
     <script src="https://kit.fontawesome.com/ab151a372f.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="../../../css/boardcss.css">
     <link rel="stylesheet" href="css/hfcss.css">
-   
 </head>
+<script type="text/javascript">
+    function cm_pInsertOK(){
+    console.log('cm_pInsertOK()....');
+    let bdnum = "${param.num}";
+    let writer = $('#comm_writer').text();
+    console.log("파라미터 넘버:" + bdnum + " 글쓴이: " + writer)
+
+    $.ajax({
+        url: "cm_pInsertOK.do",
+        data: {
+            cm_bdnum: bdnum,
+            cm_content: $('#comm_content').val(),
+            cm_writer: writer
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: function (obj) {
+            console.log('ajax...success:', obj);
+            // if (obj.result == 1) selectAll();
+        },
+        error: function (xhr, status, error) {
+            console.log('xhr.status:', xhr.status);
+        }
+    });
+	
+    }//end insertOK
+</script>
 <body>
     <%@ include file="/WEB-INF/views/comm/header.jsp"%>
 
@@ -73,6 +100,18 @@
                     </c:if>
                 </dl>
             </div>
+            <br>
+            <table border="1">
+                <tr>
+                    <td>댓글</td>
+                    <td id="comm_writer">asdf123</td>
+                    <td><input type="text" id="comm_content" value="댓글입니다."></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button onclick="cm_pInsertOK()">댓글작성</button></td>
+                </tr>
+            </table>
 
             <div class="bt_wrap">
                 <a href="bd_update.do?num=${param.num}">수정</a>

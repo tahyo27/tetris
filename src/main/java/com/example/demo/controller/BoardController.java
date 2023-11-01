@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import com.example.demo.model.AttachVO;
 import com.example.demo.model.BoardVO;
 import com.example.demo.model.ImageVO;
 import com.example.demo.model.PagingVO;
-import com.example.demo.model.ResourceResponse;
 import com.example.demo.model.UploadFile;
 import com.example.demo.service.BoardService;
 import com.example.demo.service.FileStore;

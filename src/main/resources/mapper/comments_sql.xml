@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CommentsMapper">
+
+<select id="cm_selectAll" resultType="com.example.demo.model.CommentsVO">
+	select * from comments order by cm_num desc
+</select>
+<insert id="cm_pInsert">
+	insert into comments(cm_num, cm_writer, cm_content, cm_bdnum)
+	values(cm_seq.nextval, #{cm_writer}, #{cm_content}, #{cm_bdnum})
+</insert>
+<update id="cm_pUpdate">
+	update comments set cm_content = #{cm_content}
+</update>
+</mapper>
