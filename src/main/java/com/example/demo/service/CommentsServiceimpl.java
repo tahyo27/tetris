@@ -18,9 +18,9 @@ public class CommentsServiceimpl implements CommentsService{
 	CommentsMapper commentsMapper;
 	
 	@Override
-	public List<CommentsVO> cm_selectAll() {
-		log.info("Comments Service.... cm_selectAll()");
-		return commentsMapper.cm_selectAll();
+	public List<CommentsVO> cm_selectAll(int bd_num) {
+		log.info("Comments Service.... cm_selectAll() bd_num:" + bd_num);
+		return commentsMapper.cm_selectAll(bd_num);
 	}
 
 	@Override

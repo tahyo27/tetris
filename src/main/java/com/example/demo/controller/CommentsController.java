@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.model.CommentsVO;
@@ -23,8 +24,10 @@ public class CommentsController {
 
 	@ResponseBody
 	@GetMapping("cm_selectAll.do")
-	public List<CommentsVO> cm_selectAll() {
-		List<CommentsVO> vos = commentsService.cm_selectAll();
+	public List<CommentsVO> cm_selectAll(@RequestParam(value="pram_num" , required = false ) String num) {
+		int bd_num = Integer.parseInt(num);
+		log.info("controller cm_selectAll bd_num:" + bd_num);
+		List<CommentsVO> vos = commentsService.cm_selectAll(bd_num);
 		log.info("comments controller vos:" + vos);
 
 		return vos;

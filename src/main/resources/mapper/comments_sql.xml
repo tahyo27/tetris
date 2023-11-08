@@ -3,7 +3,7 @@
 <mapper namespace="com.example.demo.mapper.CommentsMapper">
 
 <select id="cm_selectAll" resultType="com.example.demo.model.CommentsVO">
-	select * from comments order by cm_num desc
+	select * from comments where cm_bdnum = #{cm_bdnum} order by cm_num asc
 </select>
 <insert id="cm_pInsert">
 	insert into comments(cm_num, cm_writer, cm_content, cm_bdnum)

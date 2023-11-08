@@ -12,6 +12,31 @@
     <link rel="stylesheet" href="css/hfcss.css">
 </head>
 <script type="text/javascript">
+    function cm_selectAll() {
+        console.log('cm_selectAll()....');
+        $.ajax({
+        url: "cm_selectAll.do",
+        data: {
+            pram_num: "${param.num}"
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: function (obj) {
+            console.log('ajax...success:', obj);
+            let tag_li = '';
+            $.each(obj, function (index, vo){
+                tag_li += `<li><div>\${vo.cm_writer}</div>
+                    <div>\${vo.cm_content}</div>
+                    </li>`;
+            })
+            $('#comm_list').html(tag_li);
+        },
+        error: function (xhr, status, error) {
+            console.log('xhr.status:', xhr.status);
+        }
+    });
+    } //end cm_selectAll()
+
     function cm_pInsertOK(){
     console.log('cm_pInsertOK()....');
     let bdnum = "${param.num}";
@@ -36,9 +61,9 @@
         }
     });
 	
-    }//end insertOK
+    }//end cm_pInsertOK
 </script>
-<body>
+<body onload="cm_selectAll()">
     <%@ include file="/WEB-INF/views/comm/header.jsp"%>
 
     <div class="board_wrap">
@@ -101,6 +126,7 @@
                 </dl>
             </div>
             <br>
+            
             <table border="1">
                 <tr>
                     <td>댓글</td>
@@ -112,6 +138,17 @@
                     <td><button onclick="cm_pInsertOK()">댓글작성</button></td>
                 </tr>
             </table>
+
+            <div>
+                <h3>댓글 리스트</h3>
+                <div>
+                    <ul id="comm_list">
+                    </ul>
+
+                </div>
+            </div>
+
+
 
             <div class="bt_wrap">
                 <a href="bd_update.do?num=${param.num}">수정</a>
