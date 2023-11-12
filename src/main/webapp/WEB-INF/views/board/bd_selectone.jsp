@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../../css/boardcss.css">
     <link rel="stylesheet" href="css/hfcss.css">
 </head>
-<script type="text/javascript">
+<script>
     function cm_selectAll() {
         console.log('cm_selectAll()....');
         $.ajax({
@@ -25,9 +25,15 @@
             console.log('ajax...success:', obj);
             let tag_li = '';
             $.each(obj, function (index, vo){
-                tag_li += `<li><div>\${vo.cm_writer}</div>
+                tag_li += `<li style="border: 1px solid black; border-bottom: none;">
+                    <div style="display:flex; align-items:center; justify-content: space-between;">
+                        <div>\${vo.cm_writer}</div>
+                        <div onclick="showReply()" style="color:black; cursor:pointer;">답글달기</div>
+                    </div>
                     <div>\${vo.cm_content}</div>
-                    </li>`;
+                    </li>
+                    <div id="replyDiv" style="display:none;">답글 열리는거 테스트</div>
+                    `;
             })
             $('#comm_list').html(tag_li);
         },
@@ -54,7 +60,7 @@
         dataType: 'json',
         success: function (obj) {
             console.log('ajax...success:', obj);
-            // if (obj.result == 1) selectAll();
+            if (obj.result == 1) cm_selectAll();
         },
         error: function (xhr, status, error) {
             console.log('xhr.status:', xhr.status);
@@ -62,6 +68,23 @@
     });
 	
     }//end cm_pInsertOK
+
+    function cm_sInsertOK() {
+        console.log('cm_sInsertOK()....');
+    }//end cm_cm_sInsertOK
+
+    function showReply() {
+        console.log('showReply()....');
+
+        let replyDiv = document.getElementById("replyDiv");
+
+        if (replyDiv.style.display === "none") {
+            replyDiv.style.display = "block";
+        } else {
+            replyDiv.style.display = "none";
+        }
+    }
+
 </script>
 <body onload="cm_selectAll()">
     <%@ include file="/WEB-INF/views/comm/header.jsp"%>

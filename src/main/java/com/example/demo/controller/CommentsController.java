@@ -51,4 +51,14 @@ public class CommentsController {
 
 		return map;
 	}
+	
+	@ResponseBody
+	@GetMapping()
+	public Map<String, String> cm_sInsertOK(CommentsVO vo) {
+		log.info("cm_sInsertOK.....vo:{}", vo);
+		Map<String, String> map = new HashMap<String, String>();
+		
+		
+		return map;
+	}
 }
