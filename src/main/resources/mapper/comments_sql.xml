@@ -13,3 +13,6 @@
 	update comments set cm_content = #{cm_content}
 </update>
 </mapper>
+
+<!-- 댓글에서의 들여쓰기 위한 부모 스텝 값 가져오기 작성-->
+<!-- 출력은 계층쿼리 이용해서 할 예정-->

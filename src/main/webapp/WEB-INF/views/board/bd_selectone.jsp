@@ -28,11 +28,15 @@
                 tag_li += `<li style="border: 1px solid black; border-bottom: none;">
                     <div style="display:flex; align-items:center; justify-content: space-between;">
                         <div>\${vo.cm_writer}</div>
-                        <div onclick="showReply(\${vo.cm_num})" style="color:black; cursor:pointer;">답글달기</div>
+                        <div onclick="showReply(\${vo.cm_num})" style="color:black; cursor:pointer;">댓글달기</div>
                     </div>
                     <div>\${vo.cm_content}</div>
                     </li>
-                    <div id="replyDiv\${vo.cm_num}" style="display:none;">답글 열리는거 테스트</div>
+                    <div style="display:none;" id="replyDiv\${vo.cm_num}">
+                        <textarea cols="123" rows="5" style="resize:none; border:none;" id="comm_txtarea\${vo.cm_num}">답글 열리는거 테스트
+                        </textarea>
+                        <div onclick="cm_sInsertOK(\${vo.cm_num})" style="color:black; cursor:pointer;">작성하기</div>
+                    </div>
                     `;
             })
             $('#comm_list').html(tag_li);
@@ -69,8 +73,28 @@
 	
     }//end cm_pInsertOK
 
-    function cm_sInsertOK() {
-        console.log('cm_sInsertOK()....');
+    function cm_sInsertOK(num) {
+        console.log('cm_sInsertOK()....num:' + num);
+        let bdnum = "${param.num}";
+        let pNum = num;
+        $.ajax({
+        url: "cm_sInsertOK.do",
+        data: {
+            cm_bdnum: bdnum,
+            cm_content: $('#comm_txtarea' + num).val(),
+            cm_writer: "asdf1234",
+            cm_pNum : pNum
+        },
+        method: 'GET',
+        dataType: 'json',
+        success: function (obj) {
+            console.log('ajax...success:', obj);
+            // if (obj.result == 1) cm_selectAll();
+        },
+        error: function (xhr, status, error) {
+            console.log('xhr.status:', xhr.status);
+        }
+    });
     }//end cm_cm_sInsertOK
 
     function showReply(num) {
@@ -81,7 +105,7 @@
         if (replyDiv.style.display === "none") {
             replyDiv.style.display = "block";
         } else {
-            replyDiv.style.display = "none";
+            replyDiv.style.display = "none"; //한번 더 누르면 다시 안보이게
         }
     }
 
