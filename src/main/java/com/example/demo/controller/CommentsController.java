@@ -53,7 +53,7 @@ public class CommentsController {
 	}
 	
 	@ResponseBody
-	@GetMapping()
+	@GetMapping("cm_sInsertOK.do")
 	public Map<String, String> cm_sInsertOK(CommentsVO vo) {
 		log.info("cm_sInsertOK.....vo:{}", vo);
 		Map<String, String> map = new HashMap<String, String>();

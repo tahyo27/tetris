@@ -28,11 +28,11 @@
                 tag_li += `<li style="border: 1px solid black; border-bottom: none;">
                     <div style="display:flex; align-items:center; justify-content: space-between;">
                         <div>\${vo.cm_writer}</div>
-                        <div onclick="showReply()" style="color:black; cursor:pointer;">답글달기</div>
+                        <div onclick="showReply(\${vo.cm_num})" style="color:black; cursor:pointer;">답글달기</div>
                     </div>
                     <div>\${vo.cm_content}</div>
                     </li>
-                    <div id="replyDiv" style="display:none;">답글 열리는거 테스트</div>
+                    <div id="replyDiv\${vo.cm_num}" style="display:none;">답글 열리는거 테스트</div>
                     `;
             })
             $('#comm_list').html(tag_li);
@@ -73,10 +73,10 @@
         console.log('cm_sInsertOK()....');
     }//end cm_cm_sInsertOK
 
-    function showReply() {
+    function showReply(num) {
         console.log('showReply()....');
 
-        let replyDiv = document.getElementById("replyDiv");
+        let replyDiv = document.getElementById("replyDiv" + num);
 
         if (replyDiv.style.display === "none") {
             replyDiv.style.display = "block";
