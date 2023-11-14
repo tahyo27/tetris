@@ -76,14 +76,14 @@
     function cm_sInsertOK(num) {
         console.log('cm_sInsertOK()....num:' + num);
         let bdnum = "${param.num}";
-        let pNum = num;
+        let pnum = num;
         $.ajax({
         url: "cm_sInsertOK.do",
         data: {
             cm_bdnum: bdnum,
             cm_content: $('#comm_txtarea' + num).val(),
             cm_writer: "asdf1234",
-            cm_pNum : pNum
+            cm_pnum : pnum
         },
         method: 'GET',
         dataType: 'json',

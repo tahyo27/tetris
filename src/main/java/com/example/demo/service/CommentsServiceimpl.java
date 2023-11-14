@@ -35,4 +35,10 @@ public class CommentsServiceimpl implements CommentsService{
 		return commentsMapper.cm_pUpdate(vo);
 	}
 
+	@Override
+	public int cm_selectStep(int cm_num) {
+		log.info("Comments cm_selectPnum().... cm_num:" + cm_num);
+		return commentsMapper.cm_selectStep(cm_num);
+	}
+
 }
