@@ -2,25 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.CommentsMapper">
 
-<select id="cm_selectAll" resultType="com.example.demo.model.CommentsVO">
-	select * from comments where cm_bdnum = #{cm_bdnum} order by cm_num asc
-</select>
-<insert id="cm_pInsert">
-	insert into comments(cm_num, cm_writer, cm_content, cm_bdnum, cm_pnum, cm_step)
-	values(cm_seq.nextval, #{cm_writer}, #{cm_content}, #{cm_bdnum},
-	CASE
+	<select id="cm_selectAll" resultType="com.example.demo.model.CommentsVO">
+		select r.* from (select * from comments where cm_bdnum = #{bd_num}) r
+		start with cm_pnum = 0
+		connect by prior cm_num = cm_pnum
+		order siblings by cm_num
+	</select>
+	<insert id="cm_pInsert">
+		insert into comments(cm_num, cm_writer, cm_content, cm_bdnum, cm_pnum,
+		cm_step)
+		values(cm_seq.nextval, #{cm_writer}, #{cm_content}, #{cm_bdnum},
+		CASE
 		WHEN #{cm_pnum} IS NOT NULL AND #{cm_pnum} != 0 THEN #{cm_pnum} ELSE 0
-    END,
-    CASE
-        WHEN #{cm_step} IS NOT NULL AND #{cm_step} != 0 THEN #{cm_step} ELSE 0
-    END)
-</insert>
-<update id="cm_pUpdate">
-	update comments set cm_content = #{cm_content}
-</update>
-<select id="cm_selectStep" resultType="int">
-	select cm_step from comments where cm_num = #{cm_num}
-</select>
+		END,
+		CASE
+		WHEN #{cm_step} IS NOT NULL AND #{cm_step} != 0 THEN #{cm_step} ELSE 0
+		END)
+	</insert>
+	<update id="cm_pUpdate">
+		update comments set cm_content = #{cm_content}
+	</update>
+	<select id="cm_selectStep" resultType="int">
+		select cm_step from comments where cm_num = #{cm_num}
+	</select>
 
 </mapper>
 

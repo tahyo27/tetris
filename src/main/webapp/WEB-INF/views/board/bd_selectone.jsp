@@ -24,18 +24,23 @@
         success: function (obj) {
             console.log('ajax...success:', obj);
             let tag_li = '';
+            let step = 0;
             $.each(obj, function (index, vo){
-                tag_li += `<li style="border: 1px solid black; border-bottom: none;">
-                    <div style="display:flex; align-items:center; justify-content: space-between;">
-                        <div>\${vo.cm_writer}</div>
-                        <div onclick="showReply(\${vo.cm_num})" style="color:black; cursor:pointer;">댓글달기</div>
-                    </div>
-                    <div>\${vo.cm_content}</div>
-                    </li>
-                    <div style="display:none;" id="replyDiv\${vo.cm_num}">
-                        <textarea cols="123" rows="5" style="resize:none; border:none;" id="comm_txtarea\${vo.cm_num}">답글 열리는거 테스트
-                        </textarea>
-                        <div onclick="cm_sInsertOK(\${vo.cm_num})" style="color:black; cursor:pointer;">작성하기</div>
+                step = vo.cm_step*10;
+                tag_li += `
+                    <div>
+                        <li style="border: 1px solid black; border-bottom: none; margin-left:\${step}px;" >
+                            <div style="display:flex; align-items:center; justify-content: space-between;">
+                                <div>\${vo.cm_writer}</div>
+                                <div onclick="showReply(\${vo.cm_num})" style="color:black; cursor:pointer;">댓글달기</div>
+                            </div>
+                            <div>\${vo.cm_content}</div>
+                        </li>
+                        <div style="display:none;" id="replyDiv\${vo.cm_num}">
+                            <textarea cols="123" rows="5" style="resize:none; border:none;" id="comm_txtarea\${vo.cm_num}">답글 열리는거 테스트
+                            </textarea>
+                            <div onclick="cm_sInsertOK(\${vo.cm_num})" style="color:black; cursor:pointer;">작성하기</div>
+                        </div>
                     </div>
                     `;
             })
@@ -89,7 +94,7 @@
         dataType: 'json',
         success: function (obj) {
             console.log('ajax...success:', obj);
-            // if (obj.result == 1) cm_selectAll();
+            if (obj.result == 1) cm_selectAll();
         },
         error: function (xhr, status, error) {
             console.log('xhr.status:', xhr.status);
