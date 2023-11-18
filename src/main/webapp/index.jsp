@@ -18,7 +18,14 @@
     <div class="wrapper">
 		<div class="game-text">
 			<span>게임종료</span>
-			<button>다시시작</button>
+			<button id="restartBtn">다시시작</button>
+            <div class="myModal">
+                <div class="modal-content">
+                    <div>이름</div>
+                    <input type="text" id="name" required><br>
+                    <button onclick="saveData()">저장</button>
+                </div>
+            </div>
 		</div>
         <div class="score1">Lv : 1</div>
 		<div class="score">0</div>

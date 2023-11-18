@@ -4,9 +4,9 @@ import BLOCKS from "./blocks.js";
 const playground = document.querySelector(".playground > ul");
 const gameText = document.querySelector(".game-text");
 const scoreDisplay = document.querySelector(".score");
-const restartButton = document.querySelector(".game-text > button");
-const startBtn = document.querySelector(".startBtn")
-
+const restartButton = document.querySelector("#restartBtn");
+const startBtn = document.querySelector(".startBtn");
+const saveModal = document.querySelector(".myModal");
 //Setting
 const tetris_rows = 25;
 const tetris_cols = 10;
@@ -34,7 +34,10 @@ function init() {
         prependNewLine()
     }
     document.addEventListener("DOMContentLoaded", () => {
-       startBtn.addEventListener("click", generateNewBlock);
+       startBtn.addEventListener("click", ()=>{
+		   startBtn.style.display = "none";
+		   generateNewBlock();
+	   });
     });
 }
 
@@ -154,7 +157,7 @@ function dropBlock() {
 }
 
 function showGameoverText() {
-    gameText.style.display = "flex"
+    gameText.style.display = "flex";
 }
 //키작동
 document.addEventListener("keydown", e => {
