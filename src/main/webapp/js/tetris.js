@@ -7,6 +7,7 @@ const scoreDisplay = document.querySelector(".score");
 const restartButton = document.querySelector("#restartBtn");
 const startBtn = document.querySelector(".startBtn");
 const saveModal = document.querySelector(".myModal");
+const scoreInput = document.querySelector('.save_score');
 //Setting
 const tetris_rows = 25;
 const tetris_cols = 10;
@@ -30,12 +31,14 @@ init()
 function init() {
     gameText.style.display = "none";
     tempMovingItem = { ...movingItem };
+    score = 0;
     for(let i = 0; i < tetris_rows; i++) {
         prependNewLine()
     }
     document.addEventListener("DOMContentLoaded", () => {
        startBtn.addEventListener("click", ()=>{
 		   startBtn.style.display = "none";
+		   startBtn.blur();
 		   generateNewBlock();
 	   });
     });
@@ -108,8 +111,9 @@ function checkMatch() {
         if(matched) {
             child.remove();
             prependNewLine()
-            score++;
+            score += 10;
             scoreDisplay.innerText = score;
+            scoreInput.value = score;
         }
     })
 
@@ -153,11 +157,16 @@ function dropBlock() {
     clearInterval(downInterval);
     downInterval = setInterval(() => {
         moveBlock("top", 1)
-    }, 10);
+    }, 9);
 }
 
 function showGameoverText() {
     gameText.style.display = "flex";
+    if(score === 0) {
+		saveModal.style.display = "none";
+	} else {
+		saveModal.style.display = "flex";
+	}
 }
 //키작동
 document.addEventListener("keydown", e => {
@@ -189,3 +198,4 @@ restartButton.addEventListener("click",()=>{
     generateNewBlock();
     startBtn.style.display = "none";
 })
+

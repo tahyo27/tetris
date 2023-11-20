@@ -18,12 +18,15 @@
     <div class="wrapper">
 		<div class="game-text">
 			<span>게임종료</span>
-			<button id="restartBtn">다시시작</button>
+			<button id="restartBtn" style="margin-top: 10px;">다시시작</button>
             <div class="myModal">
                 <div class="modal-content">
                     <div>이름</div>
-                    <input type="text" id="name" required><br>
-                    <button onclick="saveData()">저장</button>
+                    <form action="sc_insertOK.do" method="post" id="scoreForm">
+                        <input type="text" id="name" name="name" required>
+                        <input type="hidden" class="save_score" name="score">
+                        <button type="submit">저장</button>
+                    </form>
                 </div>
             </div>
 		</div>

@@ -6,4 +6,5 @@ import com.example.demo.model.ScoreVO;
 
 public interface ScoreService {
 	List<ScoreVO> score_selectAll() throws Exception;
+	int score_insert(ScoreVO vo);
 }

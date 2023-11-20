@@ -9,4 +9,5 @@ import com.example.demo.model.ScoreVO;
 @Mapper
 public interface ScoreMapper {
 	List<ScoreVO> score_selectAll() throws Exception;
+	int score_insert(ScoreVO vo);
 }

@@ -8,4 +8,7 @@
 	 <select id="score_selectAll" resultType="com.example.demo.model.ScoreVO">
 		 select * from score
 	 </select>
+	 <insert id="score_insert">
+		 insert into score(num, name, score) values(sc_seq.nextval, #{name}, #{score})
+	 </insert>
  </mapper>

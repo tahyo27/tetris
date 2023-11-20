@@ -23,4 +23,10 @@ public class ScoreServiceimpl implements ScoreService {
 		return scoreMapper.score_selectAll();
 	}
 
+	@Override
+	public int score_insert(ScoreVO vo) {
+		log.info("score_insert...serviceimpl");
+		return scoreMapper.score_insert(vo);
+	}
+
 }
