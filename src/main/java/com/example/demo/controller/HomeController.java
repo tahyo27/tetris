@@ -22,16 +22,8 @@ public class HomeController {
 	private ScoreService service;
 	
 	@GetMapping("/")
-	public String home(ScoreVO vo, Model model) throws Exception {
-		
-		log.info("테스트 여기까지 나오는지 확인ㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
-		
-		List<ScoreVO> vos = service.score_selectAll();
-		
-		for(ScoreVO x : vos) {
-			log.info(x.toString());
-		}
-		
+	public String home() {
+		log.info("home");
 		return "index.jsp";
 	}
 	
@@ -55,7 +47,11 @@ public class HomeController {
 	}
 	
 	@GetMapping("RankingBoard.do")
-	public String RankingBoard() {
+	public String RankingBoard(Model model) throws Exception {
+		List<ScoreVO> vos = service.score_selectAll();
+		log.info("RankingBoard vos:{}", vos);
+		model.addAttribute("vos", vos);
+		
 		return "WEB-INF/views/board/rk_board.jsp";
 	}
 }

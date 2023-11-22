@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  
- <mapper namespace="com.example.demo.mapper.ScoreMapper">
-	 <select id="score_selectAll" resultType="com.example.demo.model.ScoreVO">
-		 select * from score
-	 </select>
-	 <insert id="score_insert">
-		 insert into score(num, name, score) values(sc_seq.nextval, #{name}, #{score})
-	 </insert>
- </mapper>
+
+<mapper namespace="com.example.demo.mapper.ScoreMapper">
+	<select id="score_selectAll" resultType="com.example.demo.model.ScoreVO">
+		<![CDATA[
+		SELECT name, score FROM ( SELECT name, score, ROWNUM as rnum FROM
+		TETRISSCORE ORDER BY score DESC ) WHERE rnum <= 50
+		]]>
+	</select>
+	<insert id="score_insert">
+		insert into TETRISSCORE(num, name, score) values(sc_seq.nextval,
+		#{name},
+		#{score})
+	</insert>
+</mapper>
