@@ -192,5 +192,26 @@ public class BoardController {
 
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition).body(urlResource);
 	}
-
+	
+	@GetMapping("bd_delete.do")
+	public String bd_delete(String num) {
+		log.info("bd_delete num:" + num);
+		return "WEB-INF/views/board/bd_delete.jsp";
+	}
+	
+	@PostMapping("bd_deleteOK.do") 
+	public String bd_deleteOK(BoardVO vo) {
+		log.info("bd_deleteOK vo:" + vo); //board select해서 가져오고 있으면
+		BoardVO vo2 = boardService.bd_deleteCheck(vo);
+		int num = vo.getBd_num();
+		log.info("bd_deleteOK vo2:" + vo2 + "bd_deleteOK bd_num:" + num);
+		if(vo2 == null) {
+			return "redirect:bd_delete.do?num=" + vo.getBd_num();
+		} else {
+			int bd_result = boardService.bd_delete(num);
+			int cm_result = boardService.bd_cmDelete(num);
+			log.info("bd_delete result" + bd_result + "bd_cmDelete result" + cm_result);
+			return "redirect:bd_selectAll.do";
+		}
+	}
 }// end BoardController

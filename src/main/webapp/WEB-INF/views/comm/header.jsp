@@ -15,7 +15,6 @@
     </ul>
     
     <ul class="navbar_signup">
-        <li><a href="">Sign-up</li>
     </ul>
 
     <ul class="navbar_icons">

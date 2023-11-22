@@ -25,7 +25,6 @@
 	<select id="cm_selectStep" resultType="int">
 		select cm_step from comments where cm_num = #{cm_num}
 	</select>
-
 </mapper>
 
 <!-- 댓글에서의 들여쓰기 위한 부모 스텝 값 가져오기 작성-->

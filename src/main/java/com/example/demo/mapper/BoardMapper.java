@@ -22,4 +22,7 @@ public interface BoardMapper {
 	int at_insert(AttachVO vo);
 	AttachVO at_selectOne(int num);
 	ImageVO img_selectOne(int num);
+	BoardVO bd_deleteCheck(BoardVO vo);
+	int bd_delete(int num);
+	int bd_cmDelete (int num);
 }

@@ -86,4 +86,22 @@ public class BoardServiceimpl implements BoardService{
 		return boardMapper.img_selectOne(num);
 	}
 
+	@Override
+	public BoardVO bd_deleteCheck(BoardVO vo) {
+		log.info("bd_deleteCheck.... boardservice");
+		return boardMapper.bd_deleteCheck(vo);
+	}
+
+	@Override
+	public int bd_delete(int num) {
+		log.info("bd_delete.... boardservice");
+		return boardMapper.bd_delete(num);
+	}
+
+	@Override
+	public int bd_cmDelete(int num) {
+		log.info("bd_cmDelete.... boardservice");
+		return boardMapper.bd_cmDelete(num);
+	}
+
 }

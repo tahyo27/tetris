@@ -52,5 +52,17 @@
 	 <select id="img_selectOne" resultType="com.example.demo.model.ImageVO">
 		 select * from image where img_num = #{img_num}
 	 </select>
+	 
+	 <select id="bd_deleteCheck" resultType="com.example.demo.model.BoardVO">
+		 select * from board where bd_num = #{bd_num} and bd_writer = #{bd_writer} and bd_pwd = #{bd_pwd}
+	 </select>
+	 
+	 <delete id="bd_delete">
+		 delete from board where bd_num = #{num}
+	 </delete>
+	 
+	 <delete id="bd_cmDelete">
+		 delete from comments where cm_bdnum = #{num}
+	 </delete>
 
 </mapper>
