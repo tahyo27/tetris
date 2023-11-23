@@ -10,6 +10,41 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="../../../css/boardcss.css">
     <link rel="stylesheet" href="css/hfcss.css">
+    <style>
+        .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgba(0,0,0,0.4);
+        }
+        
+        .modal-content {
+          background-color: #fefefe;
+          margin: 15% auto;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 30%;
+        }
+        
+        .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+        }
+        </style>
 </head>
 <script>
     function cm_selectAll() {
@@ -114,6 +149,27 @@
         }
     }
 
+    function openPasswordModal() {
+        document.getElementById('passwordModal').style.display = 'block';
+    }
+
+    function closePasswordModal() {
+        document.getElementById('passwordModal').style.display = 'none';
+    }
+
+    function checkPassword() {
+        let password = document.getElementById('modalPassword').value;
+        let num = '${param.num}';
+        console.log(num);
+
+        if('${vo2.bd_pwd}' === password) {
+            window.location.href = "bd_update.do?num=" + num;
+        } else {
+            alert("비밀번호가 틀립니다");
+        }
+        
+    }
+
 </script>
 <body onload="cm_selectAll()">
     <%@ include file="/WEB-INF/views/comm/header.jsp"%>
@@ -203,8 +259,17 @@
 
 
             <div class="bt_wrap">
-                <a href="bd_update.do?num=${param.num}">수정</a>
+                <a href="javascript:void(0);" onclick="openPasswordModal()">수정</a>
                 <a href="bd_delete.do?num=${param.num}">삭제</a>
+            </div>
+
+            <div id="passwordModal" class="modal">
+                <div class="modal-content">
+                  <span class="close" onclick="closePasswordModal()">&times;</span>
+                  <label for="modalPassword">비밀번호를 입력하세요:</label>
+                  <input type="password" id="modalPassword">
+                  <button onclick="checkPassword()">확인</button>
+                </div>
             </div>
     
 </body>

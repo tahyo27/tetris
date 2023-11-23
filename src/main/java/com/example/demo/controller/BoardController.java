@@ -125,12 +125,28 @@ public class BoardController {
 			vo.setBd_num(bdseq);
 			int bdImgupdate = boardService.bd_img_update(vo);
 			log.info("bdImgupdate 결과 확인" + bdImgupdate);
+		} else {
+			ImageVO img = new ImageVO();
+			img.setImg_num(bdseq);
+			img.setImg_first("default.png");
+			img.setImg_ofirst("default.png");
+			img.setImg_osecond("default.png");
+			img.setImg_second("default.png");
+			img.setImg_othird("default.png");
+			img.setImg_third("default.png");
+			int imgInsert = boardService.img_insert(img);
+			log.info("img 들어가는거 확인" + img + "img인서트 결과 확인" + imgInsert);
+			vo.setImg_num(img.getImg_num());
+			vo.setBd_num(bdseq);
+			int bdImgupdate = boardService.bd_img_update(vo);
+			log.info("bdImgupdate 결과 확인" + bdImgupdate);
 		}
 
 		System.out.println("bdseq값:" + bdseq + " bd insert값:" + bdinsert);
 
 		log.info("insertOK vo:" + vo);
-		return "WEB-INF/views/board/bd_insert.jsp";
+		
+		return "redirect:bd_selectAll.do";
 
 	}// end insertOK
 
@@ -213,5 +229,29 @@ public class BoardController {
 			log.info("bd_delete result" + bd_result + "bd_cmDelete result" + cm_result);
 			return "redirect:bd_selectAll.do";
 		}
+	}
+	
+	@GetMapping("bd_update.do")
+	public String bd_update(Model model, String num) {
+		log.info("bd_update.do + pram num:" + num);
+		int num1 = Integer.parseInt(num);
+		
+		BoardVO selectOne = boardService.bd_selectOne(num1);
+
+		model.addAttribute("vo2", selectOne);
+		
+		return "WEB-INF/views/board/bd_update.jsp";
+	}
+	@PostMapping("bd_updateOK.do")
+	public String bd_updateOK(BoardVO vo) {
+		log.info("bd_updateOK.do + BoardVO vo" + vo);
+		int result = boardService.bd_update(vo);
+		
+		if(result == 1) {
+			return "redirect:bd_selectAll.do";
+		} else {
+			return "redirect:/";
+		}
+		
 	}
 }// end BoardController

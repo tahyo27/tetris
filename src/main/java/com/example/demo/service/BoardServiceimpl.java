@@ -104,4 +104,10 @@ public class BoardServiceimpl implements BoardService{
 		return boardMapper.bd_cmDelete(num);
 	}
 
+	@Override
+	public int bd_update(BoardVO vo) {
+		log.info("bd_update.... boardservice vo:" + vo);
+		return boardMapper.bd_update(vo);
+	}
+
 }

@@ -18,6 +18,10 @@
 		insert into BOARD(bd_num, bd_title, bd_writer, bd_pwd, bd_content)
 		values(bd_seq.nextval, #{bd_title}, #{bd_writer}, #{bd_pwd}, #{bd_content})
 	</insert>
+	
+	<update id="bd_update">
+		update board set bd_title = #{bd_title}, bd_pwd = #{bd_pwd}, bd_content = #{bd_content} where bd_num = #{bd_num}
+	</update>
 
 	<select id="bd_selectOne" resultType="com.example.demo.model.BoardVO">
 		select * from BOARD where bd_num = #{bd_num}

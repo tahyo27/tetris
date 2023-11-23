@@ -25,4 +25,5 @@ public interface BoardMapper {
 	BoardVO bd_deleteCheck(BoardVO vo);
 	int bd_delete(int num);
 	int bd_cmDelete (int num);
+	int bd_update(BoardVO vo);
 }
