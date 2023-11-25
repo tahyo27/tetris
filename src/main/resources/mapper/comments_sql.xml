@@ -9,9 +9,9 @@
 		order siblings by cm_num
 	</select>
 	<insert id="cm_pInsert">
-		insert into comments(cm_num, cm_writer, cm_content, cm_bdnum, cm_pnum,
+		insert into comments(cm_num, cm_writer, cm_content, cm_bdnum, cm_pwd, cm_pnum,
 		cm_step)
-		values(cm_seq.nextval, #{cm_writer}, #{cm_content}, #{cm_bdnum},
+		values(cm_seq.nextval, #{cm_writer}, #{cm_content}, #{cm_bdnum} , #{cm_pwd},
 		CASE
 		WHEN #{cm_pnum} IS NOT NULL AND #{cm_pnum} != 0 THEN #{cm_pnum} ELSE 0
 		END,

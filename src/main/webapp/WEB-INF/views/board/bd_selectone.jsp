@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공지사항</title>
+    <title>게시글</title>
     <script src="https://kit.fontawesome.com/ab151a372f.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="../../../css/boardcss.css">
@@ -64,17 +64,26 @@
                 step = vo.cm_step*10;
                 tag_li += `
                     <div>
-                        <li style="border: 1px solid black; border-bottom: none; margin-left:\${step}px;" >
-                            <div style="display:flex; align-items:center; justify-content: space-between;">
-                                <div>\${vo.cm_writer}</div>
-                                <div onclick="showReply(\${vo.cm_num})" style="color:black; cursor:pointer;">댓글달기</div>
+                        <li style="border-bottom: 1px solid gray; margin-left:\${step}px;" >
+                            <div style="align-items:center;">
+                                <div>글쓴이 : \${vo.cm_writer}</div>
                             </div>
-                            <div>\${vo.cm_content}</div>
+                            <div style="display:flex; justify-content: flex-end;">
+                                <div style="text-align:right; cursor:pointer; margin-right:10px;">수정</div>
+                                <div onclick="showReply(\${vo.cm_num})" style="color:black; cursor:pointer; text-align:right;">댓글달기</div>
+                            </div>
+                            <div>
+                                <div>\${vo.cm_content}</div>
+                            </div>
                         </li>
                         <div style="display:none;" id="replyDiv\${vo.cm_num}">
-                            <textarea cols="123" rows="5" style="resize:none; border:none;" id="comm_txtarea\${vo.cm_num}">답글 열리는거 테스트
+                            <div style="margin-top:10px;">
+                                아이디:<input type="text" id="reply_writer\${vo.cm_num}"></input>
+                                비밀번호:<input type="password" id="reply_pwd\${vo.cm_num}"></input>
+                            </div>
+                            <textarea cols="123" rows="5" style="resize:none; border:1px solid black; margin-top:5px;" id="comm_txtarea\${vo.cm_num}">답글 열리는거 테스트
                             </textarea>
-                            <div onclick="cm_sInsertOK(\${vo.cm_num})" style="color:black; cursor:pointer;">작성하기</div>
+                            <div onclick="cm_sInsertOK(\${vo.cm_num})" style="color:black; cursor:pointer; text-align:center; border:1px solid black; background-color: gainsboro; color: black; font-weight: 400;" >작성하기</div>
                         </div>
                     </div>
                     `;
@@ -90,13 +99,15 @@
     function cm_pInsertOK(){
     console.log('cm_pInsertOK()....');
     let bdnum = "${param.num}";
-    let writer = $('#comm_writer').text();
+    let writer = $('#comm_writer').val();
+    let pwd = $('#comm_pwd').val();
     console.log("파라미터 넘버:" + bdnum + " 글쓴이: " + writer)
 
     $.ajax({
         url: "cm_pInsertOK.do",
         data: {
             cm_bdnum: bdnum,
+            cm_pwd: pwd,
             cm_content: $('#comm_content').val(),
             cm_writer: writer
         },
@@ -115,6 +126,8 @@
 
     function cm_sInsertOK(num) {
         console.log('cm_sInsertOK()....num:' + num);
+        let writer = $('#reply_writer' + num).val();;
+        let pwd = $('#reply_pwd' + num).val();
         let bdnum = "${param.num}";
         let pnum = num;
         $.ajax({
@@ -122,7 +135,8 @@
         data: {
             cm_bdnum: bdnum,
             cm_content: $('#comm_txtarea' + num).val(),
-            cm_writer: "asdf1234",
+            cm_writer: writer,
+            cm_pwd: pwd,
             cm_pnum : pnum
         },
         method: 'GET',
@@ -235,19 +249,22 @@
             </div>
             <br>
             
-            <table border="1">
-                <tr>
-                    <td>댓글</td>
-                    <td id="comm_writer">asdf123</td>
-                    <td><input type="text" id="comm_content" value="댓글입니다."></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><button onclick="cm_pInsertOK()">댓글작성</button></td>
-                </tr>
-            </table>
-
             <div>
+                <div>댓글 쓰기
+                    <div style="margin-top:10px;">
+                        아이디:<input type="text" id="comm_writer"></input>
+                        비밀번호:<input type="password" id="comm_pwd"></input>
+                    </div>
+                    <div style="margin-top:5px;">
+                        <textarea id="comm_content" cols="123" rows="5" style="resize:none; border:1px solid black;"></textarea>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                   <div onclick="cm_pInsertOK()" style="cursor: pointer; border:1px solid black; background-color: gainsboro; color: black; font-weight: 400;">등록</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
                 <h3>댓글 리스트</h3>
                 <div>
                     <ul id="comm_list">
